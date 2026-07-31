@@ -1,44 +1,14 @@
 import { gql } from "@apollo/client";
 import client from "client";
 import { BlockRenderer } from "components/BlockRenderer";
+import { Page } from "components/Page";
 import { cleanAndTransformBlocks } from "utils/cleanAndTransformBlocks";
+import { getPageStaticProps } from "utils/getPageStaticProps";
 
-export default function Pages(props) {
-  console.log("PAGE: ", props);
-  
-  return <BlockRenderer blocks={props.blocks} />;
-}
+export default Page;
 
 // get static props must be added when using getStaticPaths in [...slug]
-export const getStaticProps = async (context) => {
-  console.log("CONTEXT: ", context);
-  const uri = `/${context.params.slug.join("/")}/`;
-  console.log("URI: ", uri);
-  
-  const {data} = await client.query({
-    query: gql`
-    query PageQuery($uri: String!) {
-      nodeByUri(uri: $uri) {
-        ... on Page {
-          id
-          title
-          blocks(postTemplate: false)
-        }
-      }
-    }
-    `,
-    variables: {
-      uri
-    }
-  });
-  
-  return {
-    props: {
-      title: data.nodeByUri.title,
-      blocks: cleanAndTransformBlocks(data.nodeByUri.blocks)
-    }
-  }
-}
+export const getStaticProps = getPageStaticProps;
 
 // get static paths is a built-in NextJS function
   // query page path via uri to get the data associated
