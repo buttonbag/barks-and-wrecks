@@ -1,8 +1,6 @@
 import { gql } from "@apollo/client";
 import client from "client";
-import { BlockRenderer } from "components/BlockRenderer";
 import { Page } from "components/Page";
-import { cleanAndTransformBlocks } from "utils/cleanAndTransformBlocks";
 import { getPageStaticProps } from "utils/getPageStaticProps";
 
 export default Page;
