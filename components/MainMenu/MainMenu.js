@@ -13,9 +13,9 @@ export const MainMenu = ({ items }) => {
             </Link>
             {!!item.subMenuItems?.length && (
               <div className="group-hover:block hidden bg-slate-400 absolute top-full -mt-3">
-                {item.subMenuItems.map(item => (
-                <Link key={item.id} href={item.destination} className="hover:bg-slate-500 p-5 block whitespace-nowrap">
-                  {item.label}
+                {item.subMenuItems.map(subItem => (
+                <Link key={subItem.id} href={subItem.destination} className="hover:bg-slate-500 p-5 block whitespace-nowrap">
+                  {subItem.label}
                 </Link>
               ))}</div>
             )}

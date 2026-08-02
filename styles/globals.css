@@ -3,3 +3,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .btn {
+    @apply 
+    bg-lime-400
+    text-black
+    p-5
+    m-5
+    rounded-full
+  }
+}
