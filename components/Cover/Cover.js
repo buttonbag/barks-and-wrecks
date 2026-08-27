@@ -1,15 +1,12 @@
 import Image from "next/image"
 
 export const Cover = ({children, background}) => {
-  return <div className="h-screen text-white bg-slate-800 relative min-h-[400px] flex justify-center items-center">
+  return <div className="min-h-[300px] text-white bg-slate-800 relative flex">
     <Image
-    alt="Cover"
+    alt=""
     fill
-    className="object-cover"
+    className="object-cover object-top"
     src={background}
     />
-    <div className="z-10">
-      {children}
-    </div>
   </div>
 }
