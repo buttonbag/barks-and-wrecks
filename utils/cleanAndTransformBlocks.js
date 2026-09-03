@@ -10,7 +10,7 @@ export const cleanAndTransformBlocks = (blocksJSON) => {
         assignIds(block.innerBlocks);
       }
     });
-  }
+  };
 
   assignIds(blocks);
 

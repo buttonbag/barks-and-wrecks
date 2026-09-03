@@ -1,27 +1,82 @@
-import Link from "next/link";
+"use client"
+import { ButtonLink } from 'components/ButtonLink';
+import Link from 'next/link';
+import { useState } from 'react';
+import { FaBars, FaHamburger, FaHouseUser, FaPlus } from 'react-icons/fa';
 
-export const MainMenu = ({ items }) => {
-  console.log("ITEMS: ", items);
+export const MainMenu = ({ items, callToActionLabel, callToActionDestination }) => {
+  const [mobileNavExpanded, setMobileNavExpanded] = useState(false);
+  console.log("MENU: ", items);
 
-  return (
-    <header className="p-5 sticky h-[64px] z-20">
-      <nav className="flex justify-center">
-        {items.map(item => (
-          <div className="group">
-            <Link key={item.id} href={item.destination} className="p-5 hover:bg-slate-400">
-              {item.label}
-            </Link>
-            {!!item.subMenuItems?.length && (
-              <div className="group-hover:block hidden bg-slate-400 absolute top-full -mt-3">
-                {item.subMenuItems.map(subItem => (
-                <Link key={subItem.id} href={subItem.destination} className="hover:bg-slate-500 p-5 block whitespace-nowrap">
-                  {subItem.label}
-                </Link>
-              ))}</div>
-            )}
-          </div>
-        ))}
+  const handleMenuClick = () => {
+    setMobileNavExpanded((prev) => !prev);
+  }
+
+  return <><div className="bg-green-700 sticky top-0 z-50 px-5 text-white">
+    <div className="flex items-center justify-between h-[64px]">
+      <div className="flex items-center py-4 pl-5 font-heading uppercase">
+        <Link href={"/"}>Barks and Wrecks</Link>
+      </div>
+
+      <nav className="hidden md:flex flex-1 justify-end items-center gap-2" aria-label="Primary navigation">
+        <ul className="flex items-center gap-2">
+          {(items || []).map(item => (
+            <li key={item.id} className='hover:bg-slate-500 relative group'>
+              <Link href={item.destination} className="p-5 block">{item.label}</Link>
+              {!!item.subMenuItems?.length && (
+                <div className='group-hover:block group-focus-within:block hidden bg-slate-800 text-right absolute right-0 top-full -mt-3'>
+                  {item.subMenuItems.map(subItem => (
+                    <Link key={subItem.id} href={subItem.destination} className='hover:bg-slate-500 p-5 block whitespace-nowrap' >
+                      {subItem.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
       </nav>
-    </header>
-  );
+
+      <button
+        type="button"
+        onClick={handleMenuClick}
+        aria-expanded={mobileNavExpanded}
+        aria-controls="mobile-menu"
+        aria-label={mobileNavExpanded ? 'Close menu' : 'Open menu'}
+        className="md:hidden py-4 z-20"
+      >
+        <div>{!mobileNavExpanded ? <FaBars size={30} /> : <FaPlus size={30} className='rotate-45' />}</div>
+      </button>
+    </div>
+
+    <nav id="mobile-menu" aria-hidden={!mobileNavExpanded} className={`${mobileNavExpanded ? 'flex' : 'hidden'} absolute left-0 top-full z-30 bg-slate-800 overflow-hidden flex-col md:hidden w-full duration-300 ease-in-out`}>
+      <ul className="w-full">
+        {(items || []).map(item => (
+          <li key={item.id} className='w-full border-b border-slate-600'>
+            <Link href={item.destination} onClick={handleMenuClick} className="p-4 block w-full">{item.label}</Link>
+            {!!item.subMenuItems?.length && (
+              <div>
+                {item.subMenuItems.map(subItem => (
+                  <Link key={subItem.id} href={subItem.destination} onClick={handleMenuClick} className='hover:bg-slate-500 p-4 block whitespace-nowrap'>
+                    {subItem.label}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
+
+    </nav>
+  </div>
+  <div
+    aria-hidden={!mobileNavExpanded}
+    id='menu-id-overlay'
+    className={`
+          fixed inset-0 bg-black/80 transition-opacity duration-300 md:hidden z-20
+          ${mobileNavExpanded ? 'opacity-100' : 'opacity-0 pointer-events-none'}
+        `}
+    onClick={handleMenuClick}
+  />
+  </>
 }

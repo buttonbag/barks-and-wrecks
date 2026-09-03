@@ -1,12 +1,11 @@
-import Image from "next/image"
-
 export const Columns = ({isStackedOnMobile, children, textColor, backgroundColor}) => {
-  const textColorStyle = textColor ? {color: textColor} : {};
-  const bgColorStyle = backgroundColor ? {backgroundColor} : {};
+
+  console.log("TEXT COLOR: ", backgroundColor);
+  const textColorStyle = textColor ? {color: textColor} : {}
+  const bgColorStyle = backgroundColor ? {backgroundColor} : {}
   return (
-    <section className="max-w-screen-2xl mx-auto md:flex m-h-[946px] w-full overflow-hidden" 
-    style={{...textColorStyle, ...bgColorStyle}}>
-      <div className="flex my-10 mx-auto">{children}</div>
+    <section className="my-10 md:p-5" style={{...bgColorStyle, ...textColorStyle}}>
+      <div className={`max-w-full mx-auto ${isStackedOnMobile ? "block md:flex" : "flex"}`}>{children}</div>
     </section>
   )
 }

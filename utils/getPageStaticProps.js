@@ -1,38 +1,64 @@
-import client from "client";
-import { mapMenuItems } from "./mapMenuItems";
-import { cleanAndTransformBlocks } from "./cleanAndTransformBlocks";
 import { gql } from "@apollo/client";
+import client from "client";
+import { mapMenuItems } from "./mapMainMenu";
+import { cleanAndTransformBlocks } from "./cleanAndTransformBlocks";
+import { mapServiceItems } from "./mapServiceItems";
 
 export const getPageStaticProps = async (context) => {
   const uri = context.params?.slug ? `/${context.params.slug.join("/")}/` : "/";
   const {data} = await client.query({
     query: gql`
+    
     query PageQuery($uri: String!) {
       nodeByUri(uri: $uri) {
         ... on Page {
           id
           title
           blocks(postTemplate: false)
+          seo {
+            metaDesc
+            title
+          }
+        }
+        ... on Product {
+          id
+          title
+          blocks(postTemplate: false)
+          seo {
+            metaDesc
+            title
+          }
         }
       }
+
       acfOptionsMainMenu {
         mainMenu {
-          menuItems {
-            menuItem {
-              label
-              destination {
-                ... on Page {
-                  uri
-                }
+          callToActionButton {
+            label
+            destination {
+              ... on Page {
+                uri
               }
             }
-            items {
-              label
+          }        
+          menuItems {
+            menuItem {
               destination {
                 ... on Page {
+                  id
+                  uri
+                } 
+              }
+              label
+            }
+            items {
+              destination {
+                ... on Page {
+                  id
                   uri
                 }
               }
+              label
             }
           }
         }
@@ -43,11 +69,16 @@ export const getPageStaticProps = async (context) => {
     }
   });
   
+  
+
   return {
     props: {
-      title: data.nodeByUri.title,
+      seo: data.nodeByUri.seo,
       mainMenuItems: mapMenuItems(data.acfOptionsMainMenu.mainMenu.menuItems),
-      blocks: cleanAndTransformBlocks(data.nodeByUri.blocks)
-    }
-  }
-}
+      serviceItems: mapServiceItems(data.serviceItems),
+      blocks: cleanAndTransformBlocks(data.nodeByUri.blocks),
+      callToActionLabel: data.acfOptionsMainMenu.mainMenu.callToActionButton.label,
+      callToActionDestination: data.acfOptionsMainMenu.mainMenu.callToActionButton.destination.uri,
+    },
+  };
+};
