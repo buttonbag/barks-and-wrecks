@@ -17,6 +17,7 @@ import { Group } from "components/Group";
 import { HeroArea } from "components/HeroArea";
 import { StaffCard } from "components/StaffCard";
 import { ServiceItems } from "components/ServiceItems";
+import { FAQs } from "components/FAQs";
 
 export const BlockRenderer = ({blocks}) => {
   return blocks.map((block) => {
@@ -28,6 +29,9 @@ export const BlockRenderer = ({blocks}) => {
         cropImages={block.attributes.imageCrop}
         items={block.innerBlocks}
         />
+      }
+      case 'acf/faqs': {
+        return <FAQs key={block.id}/>
       }
       case 'acf/heroarea': {
         return <HeroArea 
@@ -53,19 +57,6 @@ export const BlockRenderer = ({blocks}) => {
         description={block.attributes.data.description}
         />
       }
-      // case 'acf/servicedetails': {
-      //   console.log("SERVICE: ",block);
-      //     return <div 
-      //     key={block.id} 
-      //     />
-          // <ServiceCard 
-          //   key={block.id} 
-          //   icon={block.attributes.data.icon}
-          //   title={block.attributes.data.title}
-          //   content={block.attributes.data.content}
-          //   price={block.attributes.data.price}
-          // />
-      // }
       case 'acf/serviceitems': {
         return <ServiceItems key={block.id} />
       }
