@@ -28,11 +28,10 @@ export default async function RootLayout({ children }) {
   
   return (
     <html lang="en" className={`${fontBody.variable} ${fontHeading.variable} h-full`}>
-      <body className='font-body h-full'>
+      <body className='font-body'>
 
-        <main className='flex flex-col min-h-full'>
-        
         <MainMenu items={data.mainMenuItems} />
+        <main className='flex flex-col min-h-full mx-auto'>
           {children}
         </main>
 
