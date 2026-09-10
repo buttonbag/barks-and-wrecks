@@ -18,6 +18,7 @@ import { HeroArea } from "components/HeroArea";
 import { StaffCard } from "components/StaffCard";
 import { ServiceItems } from "components/ServiceItems";
 import { FAQs } from "components/FAQs";
+import { Map } from "components/Map";
 
 export const BlockRenderer = ({blocks}) => {
   return blocks.map((block) => {
@@ -29,6 +30,9 @@ export const BlockRenderer = ({blocks}) => {
         cropImages={block.attributes.imageCrop}
         items={block.innerBlocks}
         />
+      }
+      case 'acf/custommap': {        
+        return <Map key={block.id} />
       }
       case 'acf/faqs': {
         return <FAQs key={block.id}/>
