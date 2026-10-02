@@ -21,12 +21,12 @@ export const MainMenu = ({ items, callToActionLabel, callToActionDestination }) 
       <nav className="hidden md:flex flex-1 justify-end items-center gap-2" aria-label="Primary navigation">
         <ul className="flex items-center gap-2">
           {(items || []).map(item => (
-            <li key={item.id} className='hover:bg-slate-500 relative group'>
+            <li key={item.id} className='hover:bg-emerald-800 relative group'>
               <Link href={item.destination} className="p-5 block">{item.label}</Link>
               {!!item.subMenuItems?.length && (
-                <div className='group-hover:block group-focus-within:block hidden bg-slate-800 text-right absolute right-0 top-full -mt-3'>
+                <div className='group-hover:block group-focus-within:block hidden bg-emerald-800 text-right absolute right-0 top-full -mt-3'>
                   {item.subMenuItems.map(subItem => (
-                    <Link key={subItem.id} href={subItem.destination} className='hover:bg-slate-500 p-5 block whitespace-nowrap' >
+                    <Link key={subItem.id} href={subItem.destination} className='hover:bg-green-700 p-5 block whitespace-nowrap' >
                       {subItem.label}
                     </Link>
                   ))}

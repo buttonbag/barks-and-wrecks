@@ -31,9 +31,8 @@
       @apply
       flex-1
       h-[1px]
-      /* bg-[#c4a882] */
       bg-yellow-600
-      bg-opacity-75
+      bg-opacity-75;
     }
     
     
@@ -44,7 +43,7 @@
     items-center
     gap-[12px]
     uppercase
-    text-xs
+    text-xs;
   }
 
   .btn {
@@ -60,23 +59,22 @@
       px-7 py-3.5 text-sm uppercase tracking-widest transition-all ease-in-out duration-300
       hover:brightness-110
       hover:scale-105
-      bg-green-700
-      ;
+      bg-green-700;
   }
 
   .stamp {
     position: relative;
-  display: inline-block;
-  padding: 4px 12px;
-  border: 2px solid currentColor;
-  border-radius: 4px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  font-size: 0.7rem;
-  font-family: var(--font-body);
-  font-weight: 700;
-  opacity: 0.85;
-  transform: rotate(-2deg);
+    display: inline-block;
+    padding: 4px 12px;
+    border: 2px solid currentColor;
+    border-radius: 4px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    font-family: var(--font-body);
+    font-weight: 700;
+    opacity: 0.85;
+    transform: rotate(-2deg);
   }
 
 }

@@ -8,7 +8,7 @@ const nextConfig = {
     dangerouslyAllowLocalIP: true,
     remotePatterns: [
         {
-          protocol: "http",
+          protocol: "https",
           hostname: imageUrl,
           pathname: "/**",
         },

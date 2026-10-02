@@ -24,7 +24,7 @@ export const Paragraph = ({ textAlign, content, textColor, annotation, fontSize 
       ${annotationMap[annotation]}
       text-${fontSizeMap[fontSize]}
       `}
-    style={{ color: textColor }}
+    style={{ color: "inherit"}}
     dangerouslySetInnerHTML={{ __html: relativeToAbsoluteUrls(content) }}
     />
   )
